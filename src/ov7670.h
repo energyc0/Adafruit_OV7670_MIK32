@@ -5,8 +5,9 @@
 #pragma once
 
 // IMPORTANT: #include ALL of the arch-specific .h files here.
-// They have #ifdef checks to only take effect on the active architecture.
+// They have #ifdef checks to only take effect on the active architecture
 #include "arch/samd51.h"
+#include "arch/mik32/mik32.h"
 
 #if defined(ARDUINO)
 #include <Arduino.h>
@@ -298,6 +299,9 @@ extern "C" {
 // architecture-specific init function.
 OV7670_status OV7670_begin(OV7670_host* host, OV7670_colorspace colorspace,
                            OV7670_size size, float fps);
+
+// Architecture specific initialization
+OV7670_status OV7670_arch_begin(OV7670_host* host);
 
 // Configure camera frame rate. Actual resulting frame rate (returned) may
 // be different depending on available clock frequencies. Result will only

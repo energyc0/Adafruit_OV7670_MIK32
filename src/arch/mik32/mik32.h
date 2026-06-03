@@ -45,7 +45,9 @@ void digitalWrite(OV7670_pin pin, uint8_t hi);
 #define CAMERA_WIDTH (640 >> CAMERA_DIV_FACTOR)
 #define CAMERA_HEIGHT (480 >> CAMERA_DIV_FACTOR)
 
+//empty struct
 typedef struct {
+    char dummy;
 } OV7670_arch;
 
 extern void OV7670_capture(uint32_t* dest, uint16_t width, uint16_t height,

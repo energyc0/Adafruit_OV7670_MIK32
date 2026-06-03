@@ -1,7 +1,7 @@
 #if defined(MIK32)
 
-#include "sccb.h"
 #include "ov7670.h"
+#include "sccb.h"
 #include "i2c_bitbang.h"
 
 #define OV7670_SLAVE_ADDR (0x21)

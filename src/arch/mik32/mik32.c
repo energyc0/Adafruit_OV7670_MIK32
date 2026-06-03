@@ -1,9 +1,8 @@
 #if defined(MIK32)
 
-#include "arch/mik32.h"
-#include "arch/uart.h"
-#include "mik32_hal_timer16.h"
 #include "ov7670.h"
+#include "uart.h"
+#include "mik32_hal_timer16.h"
 
 #include "gpio.h"
 #include "mik32_hal_i2c.h"
@@ -22,6 +21,13 @@ static int32_t data_pin_bits[8];
 static void timer_init();
 static void configure_pins(OV7670_host* host);
 static void pin_to_input(OV7670_pin pin);
+
+OV7670_status OV7670_arch_begin(OV7670_host* host) {
+    configure_pins(host);
+    timer_init();
+    HAL_DelayMs(300);
+    return OV7670_STATUS_OK;
+}
 
 __attribute__((section(".ram_text"), always_inline))  static inline uint8_t ov7670_read_byte()
 {
@@ -62,13 +68,6 @@ void digitalWrite(OV7670_pin pin, uint8_t hi)
         pin->gpio->SET = (1 << pin->pin_num);
     else
         pin->gpio->CLEAR = (1 << pin->pin_num);
-}
-
-OV7670_status OV7670_arch_begin(OV7670_host* host) {
-    configure_pins(host);
-    timer_init();
-    HAL_DelayMs(300);
-    return OV7670_STATUS_OK;
 }
 
 static void timer_init()
