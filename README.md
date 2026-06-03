@@ -148,10 +148,13 @@ setting should try to mask out or otherwise ignore those pixels.
 ## MIK32 ELBEAR ACE-UNO update
 This is an OV7670 driver for MIK32 ELBEAR ACE-UNO RISC-V microcontroller. All the information for building the *mik32* example is in *examples/mik32/*.
 This project is not completed yet, because there are some bugs with camera. Tests of *"color bars"* are passed, but *"fading color bars"* and *"shiting-1"* are not.
-Driver uses [MIK32 HAL](https://github.com/MikronMIK32/mik32-hal) and [MIK32 HAL-shared](https://github.com/MikronMIK32/mik32v2-shared) libraries.
+Driver uses [MIK32 HAL](https://github.com/MikronMIK32/mik32-hal) and [MIK32 HAL-shared](https://github.com/MikronMIK32/mik32v2-shared) libraries, so if you want to run MIK32 example you need to run:
+```bash
+$ git submodule update --init --recursive
+```
 There was implemented I2C bit-bang for SCCB, because hardware I2C cannot handle NACK the way I needed. Also you can use python script **screen_saver.py** to see the image saved in **.ppm** format.
 
-### PINS SETUP
+### Pins setup
 Pins are hardcoded for ov7670 on MIK32 ELBEAR UNO:
 - **D0** is **D3** - PORT_0_0
 - **D1** is **D5** - PORT_0_1
@@ -169,9 +172,10 @@ Pins are hardcoded for ov7670 on MIK32 ELBEAR UNO:
 - **PCLK** is **D11** - PORT_1_1
 - **RESET** is **3.3V**
 - **PWDN** is **GND**
+- 
 Microcontroller pins' output is 3.3V, so there is no need for resistors.
 
-### CONTACTS
+### Contacts MIK32 update developer
 
 + **Email:** maksim.gavrilov.0@mail.ru
 + **Telegram:** @energyc0
