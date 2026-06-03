@@ -2,13 +2,14 @@
 
 #pragma once
 
-#include "gpio.h"
-#include "mik32_hal_i2c.h"
 #include <stdint.h>
 
+#include "gpio.h"
+#include "mik32_hal_i2c.h"
+
 typedef struct {
-    GPIO_TypeDef* gpio;
-    uint8_t pin_num;
+  GPIO_TypeDef* gpio;
+  uint8_t pin_num;
 } Pin;
 
 typedef Pin* OV7670_pin;
@@ -29,7 +30,7 @@ void digitalWrite(OV7670_pin pin, uint8_t hi);
 #define XCLK_TIMER (TIMER32_2)
 #define XCLK_TIMER_CHANNEL (3)
 #define XCLK_FREQUENCY (16000000UL)
-#define XCLK_TIMER_TOP ((MIK32_SYSTEM_FREQ_HZ / XCLK_FREQUENCY)-1)
+#define XCLK_TIMER_TOP ((MIK32_SYSTEM_FREQ_HZ / XCLK_FREQUENCY) - 1)
 
 #define PCLK_PIN_NUM (1)
 #define PCLK_PIN_BIT (1 << (PCLK_PIN_NUM))
@@ -45,9 +46,9 @@ void digitalWrite(OV7670_pin pin, uint8_t hi);
 #define CAMERA_WIDTH (640 >> CAMERA_DIV_FACTOR)
 #define CAMERA_HEIGHT (480 >> CAMERA_DIV_FACTOR)
 
-//empty struct
+// empty struct
 typedef struct {
-    char dummy;
+  char dummy;
 } OV7670_arch;
 
 extern void OV7670_capture(uint32_t* dest, uint16_t width, uint16_t height,
