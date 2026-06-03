@@ -35,7 +35,8 @@ jobs:
       run: python3 ci/build_platform.py grand_central
 
     - name: doxygen
-      env:
-        GH_REPO_TOKEN: ${{ secrets.GH_REPO_TOKEN }}
-        PRETTYNAME : "Adafruit OV7670"
-      run: bash ci/doxy_gen_and_deploy.sh
+      #env:
+        #GH_REPO_TOKEN: ${{ secrets.GH_REPO_TOKEN }}
+        #PRETTYNAME : "Adafruit OV7670"
+      #run: bash ci/doxy_gen_and_deploy.sh
+      run: echo "Doxygen documentation generation skipped."
