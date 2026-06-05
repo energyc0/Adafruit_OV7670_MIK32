@@ -113,11 +113,9 @@ static void pin_to_input(OV7670_pin pin) {
   if (pin->gpio == GPIO_0) {
     PAD_CONFIG->PORT_0_CFG &= ~(0b11 << shift);
     PAD_CONFIG->PORT_0_PUPD &= ~(0b11 << shift);
-    // PAD_CONFIG->PORT_0_PUPD |= (0b10 << shift);
   } else {
     PAD_CONFIG->PORT_1_CFG &= ~(0b11 << shift);
     PAD_CONFIG->PORT_1_PUPD &= ~(0b11 << shift);
-    // PAD_CONFIG->PORT_1_PUPD |= (0b10 << shift);
   }
   pin->gpio->DIRECTION_IN = (1 << pin->pin_num);
 }
@@ -135,22 +133,14 @@ void OV7670_write_register(void* platform, uint8_t reg, uint8_t value) {
 }
 
 void MIK32_OV7670_write_register(uint8_t reg, uint8_t value) {
-  int ret = SCCB_WriteReg(reg, value);
-  if (ret) {
-    USART_Print("SCCB_WriteByte() returned ");
-    USART_PrintInt(ret);
-    USART_Print("\n\r");
-  }
+  if (!SCCB_WriteReg(reg, value))
+    USART_Print("SCCB_WriteByte() - error.\n\r");
 }
 
 int MIK32_OV7670_read_register(uint8_t reg) {
   uint8_t val = -1;
-  int ret = SCCB_ReadReg(reg, &val);
-  if (ret) {
-    USART_Print("SCCB_ReadByte() returned ");
-    USART_PrintInt(ret);
-    USART_Print("\n\r");
-  }
+  if (!SCCB_ReadReg(reg, &val))
+    USART_Print("SCCB_ReadByte()- error.\n\r");
   return (int)val;
 }
 
